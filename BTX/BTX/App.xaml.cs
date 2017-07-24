@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 using Xamarin.Forms;
 
 namespace BTX
@@ -12,8 +11,8 @@ namespace BTX
 		public App ()
 		{
 			InitializeComponent();
-
-			MainPage = new BTX.MainPage();
+            ChartDB.Instance.FillFromURL("http://www.billboard.com/charts");
+            MainPage = new BTX.MainPage();
 		}
 
 		protected override void OnStart ()
