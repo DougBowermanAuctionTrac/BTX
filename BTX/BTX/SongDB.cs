@@ -89,10 +89,10 @@ namespace BTX
                 bGotRowStats = false;
                 Title = "";
                 Artist = "";
-                CurrentRank = "";
-                PreviousRank = "";
-                PeakRank = "";
-                WeeksOnChart = "";
+                CurrentRank = "0";
+                PreviousRank = "0";
+                PeakRank = "0";
+                WeeksOnChart = "0";
 
                 Line = ReadStream.ReadLine();
                 if (Line == null)
@@ -124,24 +124,27 @@ namespace BTX
                             Artist = ReadStream.ReadLine();
                             bGotArtist = true;
                         }
-                        if (Line.Contains("class=\"chart-row__last-week\""))
+                        if (Line.Contains("class=\"chart-row__stats\""))
+                        {
+                            bGotRowStats = true;
+                        }
+                        if ((bGotRowStats) && (Line.Contains("class=\"chart-row__last-week\"")))
                         {
                             Line = ReadStream.ReadLine(); // Label
                             Line = ReadStream.ReadLine(); // Value
                             PreviousRank = Line.Substring(Line.IndexOf(">") + 1, Line.IndexOf("</") - Line.IndexOf(">") - 1);
                         }
-                        if (Line.Contains("class=\"chart-row__top-spot\""))
+                        if ((bGotRowStats) && (Line.Contains("class=\"chart-row__top-spot\"")))
                         {
                             Line = ReadStream.ReadLine(); // Label
                             Line = ReadStream.ReadLine(); // Value
                             PeakRank = Line.Substring(Line.IndexOf(">") + 1, Line.IndexOf("</") - Line.IndexOf(">") - 1);
                         }
-                        if (Line.Contains("class=\"chart-row__weeks-on-chart\""))
+                        if ((bGotRowStats) && (Line.Contains("class=\"chart-row__weeks-on-chart\"")))
                         {
                             Line = ReadStream.ReadLine(); // Label
                             Line = ReadStream.ReadLine(); // Value
                             WeeksOnChart = Line.Substring(Line.IndexOf(">") + 1, Line.IndexOf("</") - Line.IndexOf(">") - 1);
-                            bGotRowStats = true;
                         }
 
                     }

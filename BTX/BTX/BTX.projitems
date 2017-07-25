@@ -11,10 +11,11 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
-    </Compile>  
-    <Compile Include="$(MSBuildThisFileDirectory)MainPage.xaml.cs">
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Config.cs" />
+    <None Include="$(MSBuildThisFileDirectory)MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
-    </Compile>	
+    </None>
     <Compile Include="$(MSBuildThisFileDirectory)ChartsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -41,10 +42,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)MainPage.xaml">
+    <None Include="$(MSBuildThisFileDirectory)MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
+    </None>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)ChartsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

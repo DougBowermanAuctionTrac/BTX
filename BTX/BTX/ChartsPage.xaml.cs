@@ -18,9 +18,16 @@ namespace BTX
         public ChartsPage()
         {
             InitializeComponent();
-
+            MessagingCenter.Subscribe<ChartsViewCell>(this,"ChartsUpdated", (sender) => {
+                LoadCharts();
+            });
             //items = new ObservableCollection<string> { "alpha", "beta", "gamma", "delta", "epsilon" };
             myCharts = new ObservableCollection<Chart>();
+            LoadCharts();
+        }
+        private void LoadCharts()
+        {
+            myCharts.Clear();
             foreach (Chart myChart in ChartDB.Instance.GetCharts())
             {
                 myCharts.Add(myChart);
@@ -29,6 +36,7 @@ namespace BTX
             //listView.SetBinding(, new Binding("ChartNumber"));
             //listView.SetBinding(Label.TextProperty, new Binding("ChartTitle"));
             //listView.BindingContext = myCharts;
+
         }
         public void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
@@ -39,6 +47,22 @@ namespace BTX
             SongDB.Instance.FillFromURL(selChart.ChartURL);
             MessagingCenter.Send<ChartsPage>(this, "ChartSelected");
             ((ListView)sender).SelectedItem = null; // de-select the row
+        }
+
+        public void OnAllClick (Object sender,EventArgs e)
+        {
+            ChartDB.Instance.ReloadAll();
+            LoadCharts();
+        }
+        public void OnFavClick (Object sender,EventArgs e)
+        {
+            ChartDB.Instance.ReloadFavsOnly();
+            LoadCharts();
+        }
+        public void OnVisClick (Object sender,EventArgs e)
+        {
+            ChartDB.Instance.ReloadVis();
+            LoadCharts();
         }
     }
 }

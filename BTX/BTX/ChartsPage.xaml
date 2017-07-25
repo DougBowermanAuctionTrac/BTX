@@ -4,7 +4,12 @@
              xmlns:local="clr-namespace:BTX"
              x:Class="BTX.ChartsPage"
              Title="Charts">
-        <StackLayout HorizontalOptions="Center" VerticalOptions="Fill">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="MenuItem1" Order="Primary" Text="Vis" Priority="0" Clicked="OnVisClick" />
+        <ToolbarItem Name="MenuItem2" Order="Primary" Text="Fav" Priority="1" Clicked="OnFavClick" />
+        <ToolbarItem Name="MenuItem3" Order="Primary" Text="All" Priority="2" Clicked="OnAllClick" />
+    </ContentPage.ToolbarItems>
+    <StackLayout HorizontalOptions="Center" VerticalOptions="Fill">
         <ListView x:Name="listView" ItemSelected="OnItemSelected" ItemsSource="{Binding myCharts}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
